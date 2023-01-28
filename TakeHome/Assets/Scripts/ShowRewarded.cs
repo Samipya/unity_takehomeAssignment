@@ -24,11 +24,16 @@ public class ShowRewarded : MonoBehaviour, IUnityAdsShowListener
     {
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
     }
-    public void OnUnityAdsShowStart(string adUnitId) {
-        CounterManager.Instance.UpdateCounter();
-    }
+    public void OnUnityAdsShowStart(string adUnitId) {}
     public void OnUnityAdsShowClick(string adUnitId) { }
-    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState) { }
+    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState) { 
+        if(showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+        {
+            Debug.Log(" Rewarded Ad show completed...");
+            CounterManager.Instance.UpdateCounter();
+        }
+            
+    }
 
     void OnDestroy()
     {
